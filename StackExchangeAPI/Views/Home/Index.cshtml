@@ -1,8 +1,33 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-
+@model StackOverFlowTagsList
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    @if (Model.Items?.Count() > 0)
+    {
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Count</th>
+                <th>Usage</th>
+            </tr>
+            @foreach (var item in Model.Items)
+            {
+                <tr>
+                    <td>@item.name</td>
+                    <td>@item.count</td>
+                    <td>
+                        @{
+                            double allUsagesOfTags = ViewBag.allUsagesOfTags;
+                            var convertedUsagesOfTags = Math.Round((item.count / allUsagesOfTags * 100), 3);
+                    }
+                    @test2 %
+                </td>
+
+            </tr>
+        }
+        </table>
+    }
 </div>

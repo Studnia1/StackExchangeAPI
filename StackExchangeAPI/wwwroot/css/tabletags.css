@@ -1,0 +1,20 @@
+﻿      table {
+        width: 60%;
+        padding: 0;
+        margin: auto;
+        border: 1px solid #ddd;
+        border-collapse: collapse;
+  	font-family: Arial, Helvetica, sans-serif;
+      }
+
+      td {
+        width: 176px;
+        padding: 0 10px 0 0;
+        margin: auto;
+        border: 0;
+      }
+      td.last {
+        padding: 0;
+        margin: auto;
+        border: 0;
+      }

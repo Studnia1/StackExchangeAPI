@@ -2,25 +2,26 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using StackExchangeAPI.Models;
 
 namespace StackExchangeAPI.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        public async Task<IActionResult> Index()
         {
-            _logger = logger;
-        }
-
-        public IActionResult Index()
-        {
-            return View();
+            List<StackOverFlowTag> TagsList = new List<StackOverFlowTag>();
+            for(int page = 1; page<=10; page++)
+            {
+                TagsList.AddRange(RequestsClass.PostToStackExchangeApi(page).Result.Items);
+            }
+            int allUsagesOfTags = TagsList.Select(i => i.count).Sum();
+            ViewBag.allUsagesOfTags = allUsagesOfTags;
+            StackOverFlowTagsList FinalList = new StackOverFlowTagsList() { Items = TagsList };
+            return View(FinalList);
         }
 
         public IActionResult Privacy()
